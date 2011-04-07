@@ -1,0 +1,38 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.66.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 0fde9d127ab606a8beef84b75262923da12b10bd Build.PL
+SHA1 b0cbf385b161f69ff1e0e3da020671c06442489d Changes
+SHA1 e9d9c3d60cf37ce7282a86b3087daf762ef75d8e MANIFEST
+SHA1 7d20e4e840781030202bb045d5ab81b3fd1b68b0 MANIFEST.SKIP
+SHA1 64e64f56c652228aca800b07aa25f59ac6961cd8 META.yml
+SHA1 ff9ebe9dddff03a41b8c90398b1b1e375766bae9 Makefile.PL
+SHA1 d0375522186b806282c24039579018762c1c93a4 README
+SHA1 a5048c3e18478a40eb039487b6f25d37c70f24fd lib/TV/ProgrammesSchedules/Sony.pm
+SHA1 b06bc653826ee223bce893e6569f9d58ef20278f t/00-load.t
+SHA1 2b8ffb7e4f399af95d092743846ac8d438f2c53e t/manifest.t
+SHA1 0765c9ff0cc4319f415bb08d0053b7717a8284a2 t/pod.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.14 (MingW32)
+
+iQEcBAEBAgAGBQJNnaz4AAoJEPYcXBXhRYOhkuoH/icO5Ob3TgKVu+ORiAnJzHXA
+hQgNLijA2zknLuD9mjVpJWlVfZx8k6blM/cLaRwbEgAM0s0Xc9omCRviw+Kq0TUd
+jwFCpxWDiqkHRvXe/Co1n/qm+yAu8q7k+HyivykCTC4Aagl92Zm8MxEY2n4lf5UD
+tB3gtuIl+kgBG5VzeGQyQBkyhlD6MjnHfdInPcG3DZoTeXUQczla2foYFu88AaTh
+ZsQ1KwunQNRAItl4Erew6ztyEw+M6JmF3TTODMsPqAAvtm49jXd6HjxPou3W3aHL
+kc9D47vPfxWh7qS1hArPdrYj4ouG86bFktUvo0W1P/7DHyq7bqFsT9VC36Yb9EE=
+=uAn5
+-----END PGP SIGNATURE-----
