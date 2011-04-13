@@ -17,11 +17,11 @@ TV::ProgrammesSchedules::Sony - Interface to Sony TV Programmes Schedules.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 Readonly my $BASE_URL  => 'http://www.setasia.tv';
 Readonly my $LOCATIONS => 
@@ -59,18 +59,18 @@ If missing picks up the current year, month and day. Currently covers SetAsia ON
 
 However plans are to cover others like SetIndia, MAXtelevision, SABTV, MAX Asia.
 
-    --------------------------------------------------------------
-    | Name                    | Location        | YYYY | MM | DD |
-    --------------------------------------------------------------
-    | Australia               | en-au           | 2011 |  4 |  7 |
-    | Canada                  | en-ca           | 2011 |  4 |  7 |
-    | New Zealand             | en-nz           | 2011 |  4 |  7 |
-    | Pakistan                | en-pk           | 2011 |  4 |  7 |
-    | South Africa            | en-za           | 2011 |  4 |  7 |
-    | UK & Europe             | en-gb           | 2011 |  4 |  7 |
-    | United Arab Emirates    | en-ae           | 2011 |  4 |  7 |
-    | USA                     | en-us           | 2011 |  4 |  7 |
-    --------------------------------------------------------------    
+    ----------------------------------------------------
+    | Name                 | Location | YYYY | MM | DD |
+    ----------------------------------------------------
+    | Australia            |   en-au  | 2011 |  4 |  7 |
+    | Canada               |   en-ca  | 2011 |  4 |  7 |
+    | New Zealand          |   en-nz  | 2011 |  4 |  7 |
+    | Pakistan             |   en-pk  | 2011 |  4 |  7 |
+    | South Africa         |   en-za  | 2011 |  4 |  7 |
+    | UK & Europe          |   en-gb  | 2011 |  4 |  7 |
+    | United Arab Emirates |   en-ae  | 2011 |  4 |  7 |
+    | USA                  |   en-us  | 2011 |  4 |  7 |
+    ----------------------------------------------------    
 
 =cut
 
@@ -79,6 +79,7 @@ sub new
     my $class = shift;
     my $param = shift;
     
+    _validate_param($param);
     $param->{_browser} = LWP::UserAgent->new();
     unless (defined($param->{yyyy}) && defined($param->{mm}) && defined($param->{dd}))
     {
@@ -213,6 +214,30 @@ sub _trim
     $data =~ s/\s+/ /g;
     $data =~ s/[\n\r]//g;    
     return $data;
+}
+
+sub _validate_param
+{
+    my $param = shift;
+    
+    croak("ERROR: Input param has to be a ref to HASH.\n")
+        if (ref($param) ne 'HASH');
+    croak("ERROR: Missing key location.\n")
+        unless exists($param->{location});
+    croak("ERROR: Invalid value for location.\n")
+        unless exists($LOCATIONS->{$param->{location}});
+    croak("ERROR: Missing key mm from input hash.\n")
+        if (defined($param->{yyyy}) && !exists($param->{mm}));
+    croak("ERROR: Missing key dd from input hash.\n")
+        if (defined($param->{yyyy}) && !exists($param->{dd}));
+    croak("ERROR: Missing key yyyy from input hash.\n")
+        if (defined($param->{mm}) && !exists($param->{yyyy}));
+    croak("ERROR: Missing key dd from input hash.\n")
+        if (defined($param->{mm}) && !exists($param->{dd}));
+    croak("ERROR: Missing key yyyy from input hash.\n")
+        if (defined($param->{dd}) && !exists($param->{yyyy}));
+    croak("ERROR: Missing key mm from input hash.\n")
+        if (defined($param->{dd}) && !exists($param->{mm}));
 }
 
 =head1 AUTHOR

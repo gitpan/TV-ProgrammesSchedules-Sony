@@ -1,4 +1,8 @@
 Revision history for TV-ProgrammesSchedules-Sony
 
+0.02    Wed Apr 13 15:35:10 2011
+        - Added internal method _validate_param().
+        - Added unit test 01-unit-test.t for method _validate_param().
+
 0.01    Thu Apr 07 11:48:21 2011
         - First version released.
