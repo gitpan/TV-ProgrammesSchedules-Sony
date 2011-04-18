@@ -17,11 +17,11 @@ TV::ProgrammesSchedules::Sony - Interface to Sony TV Programmes Schedules.
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 Readonly my $BASE_URL  => 'http://www.setasia.tv';
 Readonly my $LOCATIONS => 
@@ -36,7 +36,7 @@ Readonly my $LOCATIONS =>
     'en-us' => 'USA'
 };
 
-=head1 SYNOPSIS
+=head1 DESCRIPTION
 
 Sony Entertainment Television  was launched in the Indian sub-continent and the Middle East in 
 October 1995. The channel is a joint partnership between Sony Pictures Entertainment and Argos 
@@ -59,9 +59,9 @@ If missing picks up the current year, month and day. Currently covers SetAsia ON
 
 However plans are to cover others like SetIndia, MAXtelevision, SABTV, MAX Asia.
 
-    ----------------------------------------------------
+    +----------------------+----------+------+----+----+
     | Name                 | Location | YYYY | MM | DD |
-    ----------------------------------------------------
+    +----------------------+----------+------+----+----+
     | Australia            |   en-au  | 2011 |  4 |  7 |
     | Canada               |   en-ca  | 2011 |  4 |  7 |
     | New Zealand          |   en-nz  | 2011 |  4 |  7 |
@@ -70,7 +70,7 @@ However plans are to cover others like SetIndia, MAXtelevision, SABTV, MAX Asia.
     | UK & Europe          |   en-gb  | 2011 |  4 |  7 |
     | United Arab Emirates |   en-ae  | 2011 |  4 |  7 |
     | USA                  |   en-us  | 2011 |  4 |  7 |
-    ----------------------------------------------------    
+    +----------------------+----------+------+----+----+    
 
 =cut
 
@@ -119,7 +119,7 @@ sub get_url
 
 =head2 get_listings()
 
-Return the programmes listings for the given location. Data would be in the form of reference 
+Return the programmes  listings for the given location. Data would be in the form of reference 
 to a list containing anonymous hash with keys time, time and url for each of the programmes.
 
     use strict; use warnings;
@@ -191,9 +191,9 @@ sub as_string
     foreach (@{$self->{listings}})
     {
         $_->{url} = 'N/A' unless defined($_->{url});
-        $listings .= sprintf("  Start Time: %s\n", $_->{time});
-        $listings .= sprintf("       Title: %s\n", $_->{title});
-        $listings .= sprintf("         URL: %s\n", $_->{url});
+        $listings .= sprintf("Start Time: %s\n", $_->{time});
+        $listings .= sprintf("     Title: %s\n", $_->{title});
+        $listings .= sprintf("       URL: %s\n", $_->{url});
         $listings .= "-------------------\n";
     }
     return $listings;
@@ -246,9 +246,10 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-tv-programmesschedules-sony at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TV-ProgrammesSchedules-Sony>.  
-I will be notified, and then you'll automatically be notified of progress on your bug as I make changes.
+Please report any  bugs/feature requests to C<bug-tv-programmesschedules-sony at rt.cpan.org>,
+or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TV-ProgrammesSchedules-Sony>.  
+I  will  be  notified, and then you'll automatically be notified of  progress on your bug as I 
+make changes.
 
 =head1 SUPPORT
 
@@ -280,9 +281,9 @@ L<http://search.cpan.org/dist/TV-ProgrammesSchedules-Sony/>
 
 =head1 ACKNOWLEDGEMENTS
 
-TV::ProgrammesSchedules::Sony provides information from SetAsia official website. This information should 
-be used as it is without any modifications. Sony Entertainment Television groups remain the sole owner of 
-the data.
+TV::ProgrammesSchedules::Sony provides information from SetAsia official website. This  should
+be used as it is without any modifications.  Sony  Entertainment  Television groups remain the 
+sole owner of the data.
 
 =head1 LICENSE AND COPYRIGHT
 
@@ -296,7 +297,8 @@ See http://dev.perl.org/licenses/ for more information.
 
 =head1 DISCLAIMER
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+This  program  is  distributed  in  the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
 
