@@ -17,15 +17,15 @@ TV::ProgrammesSchedules::Sony - Interface to Sony TV Programmes Schedules.
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 Readonly my $BASE_URL  => 'http://www.setasia.tv';
-Readonly my $LOCATIONS => 
-{    
+Readonly my $LOCATIONS =>
+{
     'en-au' => 'Australia',
     'en-ca' => 'Canada',
     'en-nz' => 'New Zealand',
@@ -38,23 +38,23 @@ Readonly my $LOCATIONS =>
 
 =head1 DESCRIPTION
 
-Sony Entertainment Television  was launched in the Indian sub-continent and the Middle East in 
-October 1995. The channel is a joint partnership between Sony Pictures Entertainment and Argos 
-Communications Enterprises a Singapore based entertainment company specialising in South Asian 
+Sony Entertainment Television  was launched in the Indian sub-continent and the Middle East in
+October 1995. The channel is a joint partnership between Sony Pictures Entertainment and Argos
+Communications Enterprises a Singapore based entertainment company specialising in South Asian
 program production and media services.
 
-As a result of the rapid and considerable success that Sony Entertainment Television enjoyed in 
-the Indian sub-continent and the Middle East, the decision was taken to establish international 
-feeds  known as Sony Entertainment Television Asia. Major operations encompass the UK & Europe, 
+As a result of the rapid and considerable success that Sony Entertainment Television enjoyed in
+the Indian sub-continent and the Middle East, the decision was taken to establish international
+feeds  known as Sony Entertainment Television Asia. Major operations encompass the UK & Europe,
 the USA, Africa and Australasia.
 
-The  channel  is  now  available  throughout the world - a truly global operation bringing high 
+The  channel  is  now  available  throughout the world - a truly global operation bringing high
 quality entertainment to South Asians everywhere.
 
 =head1 CONSTRUCTOR
 
-The constructor expects a reference to an anonymous hash as input parameter. Table below shows 
-the possible value of various keys (location, yyyy, mm, dd). The yyyy, mm and dd are optional. 
+The constructor expects a reference to an anonymous hash as input parameter. Table below shows
+the possible value of various keys (location, yyyy, mm, dd). The yyyy, mm and dd are optional.
 If missing picks up the current year, month and day. Currently covers SetAsia ONLY.
 
 However plans are to cover others like SetIndia, MAXtelevision, SABTV, MAX Asia.
@@ -70,7 +70,7 @@ However plans are to cover others like SetIndia, MAXtelevision, SABTV, MAX Asia.
     | UK & Europe          |   en-gb  | 2011 |  4 |  7 |
     | United Arab Emirates |   en-ae  | 2011 |  4 |  7 |
     | USA                  |   en-us  | 2011 |  4 |  7 |
-    +----------------------+----------+------+----+----+    
+    +----------------------+----------+------+----+----+
 
 =cut
 
@@ -78,16 +78,16 @@ sub new
 {
     my $class = shift;
     my $param = shift;
-    
+
     _validate_param($param);
     $param->{_browser} = LWP::UserAgent->new();
     unless (defined($param->{yyyy}) && defined($param->{mm}) && defined($param->{dd}))
     {
-        my $today = localtime; 
+        my $today = localtime;
         $param->{yyyy} = $today->year+1900;
         $param->{mm}   = $today->mon+1;
         $param->{dd}   = $today->mday;
-    }    
+    }
     bless $param, $class;
     return $param;
 }
@@ -100,7 +100,7 @@ Prepare and return URL using the given information.
 
     use strict; use warnings;
     use TV::ProgrammesSchedules::Sony;
-    
+
     my $sony = TV::ProgrammesSchedules::Sony->new({ location => 'en-gb' });
     print $sony->get_url();
 
@@ -109,22 +109,22 @@ Prepare and return URL using the given information.
 sub get_url
 {
     my $self = shift;
-    return sprintf("%s/%s/schedule#%04d-%02d-%02d", 
-            $BASE_URL, 
+    return sprintf("%s/%s/schedule#%04d-%02d-%02d",
+            $BASE_URL,
             $self->{location},
-            $self->{yyyy}, 
-            $self->{mm}, 
+            $self->{yyyy},
+            $self->{mm},
             $self->{dd});
 }
 
 =head2 get_listings()
 
-Return the programmes  listings for the given location. Data would be in the form of reference 
+Return the programmes  listings for the given location. Data would be in the form of reference
 to a list containing anonymous hash with keys time, time and url for each of the programmes.
 
     use strict; use warnings;
     use TV::ProgrammesSchedules::Sony;
-    
+
     my $sony     = TV::ProgrammesSchedules::Sony->new({ location => 'en-gb' });
     my $listings = $sony->get_listings();
 
@@ -136,9 +136,9 @@ sub get_listings
     my $url      = $self->get_url();
     my $browser  = $self->{_browser};
     my $response = $browser->request(POST $url);
-    croak("ERROR: Couldn't connect to [$url].\n") 
+    croak("ERROR: Couldn't connect to [$url].\n")
         unless $response->is_success;
-    
+
     my ($contents, $listings, $program, $line);
     $contents = $response->content;
     $contents = _trim($contents);
@@ -164,6 +164,40 @@ sub get_listings
     return $listings;
 }
 
+=head2 as_xml()
+
+Returns listings in XML format. By default it returns todays lisitng for Sony TV.
+
+    use strict; use warnings;
+    use TV::ProgrammesSchedules::Sony;
+
+    my $sony = TV::ProgrammesSchedules::Sony->new({ location => 'en-gb' });
+    print $sony->as_xml();
+
+=cut
+
+sub as_xml
+{
+    my $self = shift;
+    my ($xml, $listings);
+
+    $self->{listings} = $self->get_listings()
+        unless defined($self->{listings});
+
+    $xml = qq {<?xml version="1.0" encoding="UTF-8"?>\n};
+    $xml.= qq {<programmes>\n};
+    foreach (@{$self->{listings}})
+    {
+        $xml .= qq {\t<programme>\n};
+        $xml .= qq {\t\t<time> $_->{time} </time>\n};
+        $xml .= qq {\t\t<title> $_->{title} </title>\n};
+        $xml .= qq {\t\t<url> $_->{url} </url>\n} if exists($_->{url});
+        $xml .= qq {\t</programme>\n};
+    }
+    $xml.= qq {</programmes>};
+    return $xml;
+}
+
 =head2 as_string()
 
 Returns listings in a human readable format.
@@ -184,7 +218,7 @@ sub as_string
 {
     my $self = shift;
     my ($listings);
-    
+
     $self->{listings} = $self->get_listings()
         unless defined($self->{listings});
 
@@ -212,14 +246,14 @@ sub _trim
     $data =~ s/^\s+//g;
     $data =~ s/\s+$//g;
     $data =~ s/\s+/ /g;
-    $data =~ s/[\n\r]//g;    
+    $data =~ s/[\n\r]//g;
     return $data;
 }
 
 sub _validate_param
 {
     my $param = shift;
-    
+
     croak("ERROR: Input param has to be a ref to HASH.\n")
         if (ref($param) ne 'HASH');
     croak("ERROR: Missing key location.\n")
@@ -247,8 +281,8 @@ Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 =head1 BUGS
 
 Please report any  bugs/feature requests to C<bug-tv-programmesschedules-sony at rt.cpan.org>,
-or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TV-ProgrammesSchedules-Sony>.  
-I  will  be  notified, and then you'll automatically be notified of  progress on your bug as I 
+or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TV-ProgrammesSchedules-Sony>.
+I  will  be  notified, and then you'll automatically be notified of  progress on your bug as I
 make changes.
 
 =head1 SUPPORT
@@ -282,7 +316,7 @@ L<http://search.cpan.org/dist/TV-ProgrammesSchedules-Sony/>
 =head1 ACKNOWLEDGEMENTS
 
 TV::ProgrammesSchedules::Sony provides information from SetAsia official website. This  should
-be used as it is without any modifications.  Sony  Entertainment  Television groups remain the 
+be used as it is without any modifications.  Sony  Entertainment  Television groups remain the
 sole owner of the data.
 
 =head1 LICENSE AND COPYRIGHT
@@ -297,7 +331,7 @@ See http://dev.perl.org/licenses/ for more information.
 
 =head1 DISCLAIMER
 
-This  program  is  distributed  in  the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+This  program  is  distributed  in  the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 =cut
