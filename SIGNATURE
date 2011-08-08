@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.66.
+signed via the Module::Signature module, version 0.68.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,26 +14,26 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 0fde9d127ab606a8beef84b75262923da12b10bd Build.PL
-SHA1 9bc929bf11f1e66f9637575e0f618b36fa933feb Changes
+SHA1 9c95059743a1dce2a753c23f6416818e63f0c2fa Build.PL
+SHA1 136e16d5d80330c35d756773ccc7bfa8ceb20296 Changes
 SHA1 93b981e6fa91f47e61d0f615593a1e601c60cb19 MANIFEST
 SHA1 7d20e4e840781030202bb045d5ab81b3fd1b68b0 MANIFEST.SKIP
-SHA1 e95d8cf8047f299347a0f71ffd696ed98848246d META.yml
-SHA1 ff9ebe9dddff03a41b8c90398b1b1e375766bae9 Makefile.PL
+SHA1 7981dcb08bb69fc578233f99650dff8b3ecd6763 META.yml
+SHA1 3d9791b0b06a6db9df8fd07d179828ee9e56d700 Makefile.PL
 SHA1 d0375522186b806282c24039579018762c1c93a4 README
-SHA1 37da0598f0430c77b508d4d21d7529f418e23076 lib/TV/ProgrammesSchedules/Sony.pm
+SHA1 7a029a202808013db0d5bd84059f20aff04e4793 lib/TV/ProgrammesSchedules/Sony.pm
 SHA1 b06bc653826ee223bce893e6569f9d58ef20278f t/00-load.t
 SHA1 8e544102bd9c69557a38eba55bc12403c4a7cd00 t/01-unit-test.t
 SHA1 2b8ffb7e4f399af95d092743846ac8d438f2c53e t/manifest.t
 SHA1 0765c9ff0cc4319f415bb08d0053b7717a8284a2 t/pod.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (MingW32)
+Version: GnuPG v2.0.14 (MingW32)
 
-iQEcBAEBAgAGBQJNvrfzAAoJENoXJXWo7C/pubwH/12r7dlWNm2tVgCpQHQGJo/p
-D9+4MjgQZpD+NYnwXgjiSh5xzgkboNSqicNxmaWJzzG6NpCTO/HIwQFBgASmmICz
-1M8M6q29ihskOi5DtLq44XiFmVLFxHB6TNOGZEksEEG/BfBx05eckhm0DD140sYu
-Ge4BZCxEK5zL9feGDUMyu3uxhAJLEpuhkr5fsw/2pCzQRx+JhWnWM4ld+AqwIKBJ
-+ihv/WvvWdsEGO/+KNbXuyxEgXKRjKzZ7G9VyrKpVMVFbKNbwg+DeqKAS5WVjrAk
-kOnE7omXUgYSbirJiPhwr+l7lqggvogF8YVMF2Zc0t2CfObuhKnPUdcGKFmpByA=
-=3z/g
+iQEcBAEBAgAGBQJOP7BoAAoJEPYcXBXhRYOh8S4H/0k8CV3A0vexOjhDVm3pCnGl
+sABuR+ad5OcjbvF4lnoc34cLkrosh7XsPrV0EkY0dew3X8Y4yox5wy7e9ucXOyOY
++3SZawURCaiISCTKggTkMGcIb7XpMn658LYg+Vp4iBSJDKBSVgDcC+1HFaqIJB6J
+nIhcQCQ7AZBiMBkb3grOi0yEUxtcKUzk7028T6a4a0sXfCaFiv/4FvehM0sW7WsX
+qbCeiO8Scni3uGWcWbsR8psy0Li9d6tV8d92jnYF89V0zy2qZ896VyJMXjpRaiYx
+mpxTiI3VdasKwvLEl8YSux7T1zVZ9UZRu2kiTNIwrvtMXuOULqvJnxFqS6XCvbU=
+=zM1G
 -----END PGP SIGNATURE-----

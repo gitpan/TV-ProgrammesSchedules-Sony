@@ -10,7 +10,7 @@ WriteMakefile(
     clean         => { FILES => 'TV-ProgrammesSchedules-Sony-*' },
     PREREQ_PM     => {
         'Test::More'      => 0,
-        'Readonly'        => 0,
+        'Readonly'        => '1.03',
         'Time::localtime' => '1.02',
         'HTTP::Request'   => '1.40',
         'LWP::UserAgent'  => '2.33',

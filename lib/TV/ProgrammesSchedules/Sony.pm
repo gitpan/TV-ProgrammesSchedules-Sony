@@ -17,11 +17,11 @@ TV::ProgrammesSchedules::Sony - Interface to Sony TV Programmes Schedules.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 Readonly my $BASE_URL  => 'http://www.setasia.tv';
 Readonly my $LOCATIONS =>

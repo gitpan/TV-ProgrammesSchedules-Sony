@@ -1,5 +1,9 @@
 Revision history for TV-ProgrammesSchedules-Sony
 
+0.05    Mon Aug 08 10:44:11 2011
+        - Made Readonly v1.03 as minimum requirement.
+        - Prepared the distribution using the Module::Signature v0.68.
+
 0.04    Mon May 02 14:54:01 2011
         - Added method as_xml() to return listings in XML format.
 
